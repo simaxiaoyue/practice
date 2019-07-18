@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function XiaoNa() {
+        //1.询问功能
+        this.ask = function () {
+            var info = prompt(' 1.求和\n 2.时间\n 3.笑话\n q退出');
+            return info;
+        }
+        //2.求和功能
+        this.sum = function () {
+            var n = prompt('请输入你要求和的数字，以逗号隔开，例如： 1,2,3,4');
+            var arr = n.split(',');
+            var sum = 0;
+            for (var i = 0; i < arr.length; i++) {
+                sum += parseFloat(arr[i]);
+            }
+            alert(sum);
+        }
+        // 3.报时功能
+        this.date = function () {
+            var date = new Date();
+            var y = date.getFullYear();
+            var M = date.getMonth() + 1;
+            var d = date.getDate();
+            var h = date.getHours();
+            var m = date.getMinutes();
+            var s = date.getSeconds();
+            M = M < 10 ? '0' + M : M;
+            d = d < 10 ? '0' + d : d;
+            h = h < 10 ? '0' + h : h;
+            m = m < 10 ? '0' + m : m;
+            s = s < 10 ? '0' + s : s;
+            var time = y + '-' + M + '-' + d + ' ' + h + ':' + m + ':' + s;
+            alert(time);
+        }
+        // 4.讲笑话功能
+        this.joke = function () {
+            var joke = ['笑话1', '笑话2', '笑话3', '笑话4', '笑话5', '笑话6']
+            var j = Math.floor(Math.random() * joke.length)
+            alert(joke[j]);
+        }
+        // 5.输入非1,2,3或关键字时候
+        this.unknow = function () {
+            alert('我不明白你在说什么')
+        }
+    }
+    var x1 = new XiaoNa();
+    while (true) {
+        //1.询问
+        var info = x1.ask();
+        //2.退出
+        if (info === 'q') {
+            alert('已经退出');
+            break;
+        }
+        //3.主体功能
+        switch (info) {
+            case '1':
+            case '求和':
+                x1.sum();
+                break;
+            case '2':
+            case '时间':
+                x1.date();
+                break;
+            case '3':
+            case '笑话':
+                x1.joke();
+                break;
+            default:
+                x1.unknow();
+                break;
+        }
+    }
+</script>
+
+
+</html>

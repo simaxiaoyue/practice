@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+body {
+  user-select: none;
+}
+  </style>
+</head>
+<body>
+  <div>小彭，今天很开心，因为它看到了他的女神铁柱，铁柱还对他笑了一下。</div>
+</body>
+<script src="./jquery-2.2.2.js"></script>
+<script>
+$(document).on('contextmenu',e=>{
+  e.preventDefault();
+});
+$(document).on('keydown',e=>{
+  if(e.keyCode===67&&e.ctrlKey){
+    e.preventDefault();
+  }
+});
+
+</script>
+</html>

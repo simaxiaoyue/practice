@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body style="height: 100px">
+
+</body>
+<script>
+    function getInt(n, m) {
+        return Math.floor(Math.random() * (m - n + 1) + n);
+    }
+    //方法1:使用rgb
+    // function getRgb() {
+    //     var r = getInt(0, 255);
+    //     var g = getInt(0, 255);
+    //     var b = getInt(0, 255);
+    //     return 'rgb(' + r + ',' + g + ',' + b + ')';
+    // }
+    // var bgc = document.body;
+    // bgc.onmousemove = function () {
+    //     document.body.style.backgroundColor = getRgb();
+    // }
+
+    //方法2:使用rgba
+    //     function getRgba() {
+    //         var r = getInt(0, 255);
+    //         var g = getInt(0, 255);
+    //         var b = getInt(0, 255);
+    //         var a = Math.floor(Math.random() * 100) / 100;
+    //  return 'rgba(' + r + ',' + g + ',' + b + ','+a+')';
+
+    //     }
+    //     var bgc = document.body;
+    //     bgc.onmouseenter = function () {
+    //         document.body.style.backgroundColor = getRgba();
+    //     }
+
+    // 方法3:使用16进制
+    function get16() {
+        var color = '#';
+        for (i = 0; i < 6; i++) {
+            var f = Math.floor(Math.random() * 16);
+            color += f.toString(16);
+        }
+        return color;
+
+    }
+    var bgc = document.body;
+    bgc.onmouseenter = function () {
+        document.body.style.backgroundColor = get16();
+    }
+</script>
+
+</html>
