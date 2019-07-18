@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 600px;
+      height: 400px;
+      border: 1px solid #000;
+      margin: 100px auto;
+    }
+
+    .nav::after,
+    .nav::before {
+      content: "";
+      clear: both;
+      display: block;
+    }
+
+    .nav li {
+      float: left;
+      width: 100px;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      border-bottom: 1px solid #000;
+      border-right: 1px solid #000;
+    }
+
+    .nav li.active {
+      background-color: hotpink;
+    }
+
+    .row {
+      border-top: 1px solid #000;
+    }
+
+    .row .content {
+      height: 338px;
+      background-color: green;
+      display: none;
+    }
+
+    .row .show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- 每个分类 -->
+    <ul class="nav">
+      <li class="active">影音</li>
+      <li>书籍</li>
+      <li>零食</li>
+    </ul>
+    <!-- 分类对应的多个内容 -->
+    <div class="row">
+      <div class="content show">影音的对应的内容</div>
+      <div class="content">书籍的对应的内容</div>
+      <div class="content">零食的对应的内容</div>
+    </div>
+  </div>
+</body>
+<script>
+  // let lis = document.querySelectorAll('.nav>li');
+  // let content = document.querySelectorAll('.content');
+  // lis.forEach((li, index) => {
+  //   li.onmouseover = function () {
+  //     lis.forEach(e => {
+  //       e.classList.remove('active');
+  //     })
+  //     this.classList.add('active');
+  //     contents.forEach(e => {
+  //       e.classList.remove('show');
+  //     })
+  //     contents[index].classList.add('show');
+  //   }
+  // })
+  class Tab {
+    // li的选择器   navSelector
+    //     内容的选择器 contentSelector
+    //     触发的事件类型 type
+    //     特殊的li的类名 navClass
+    //     显示隐藏内容的类名 contentClass
+    constructor(options) {
+      options = options || {};
+      this.navSelector = options.navSelector || '.nav > li';
+      this.contentSelector = options.contentSelector || '.content';
+      this.type = options.type || 'mouseover';
+      this.navClass = options.navClass || 'active';
+      this.contentClass = options.contentClass || 'show';
+    }
+    addEvent() {
+      let _this = this;
+      let lis = document.querySelectorAll(this.navSelector);
+      let contents = document.querySelectorAll(this.contentSelector);
+      lis.forEach((e, i) => {
+        e.addEventListener(this.type,function () {
+          lis.forEach(e => {
+            e.classList.remove(_this.navClass);
+          })
+          this.classList.add(_this.navClass);
+          contents.forEach(e => {
+            e.classList.remove(_this.contentClass);
+          })
+          contents[i].classList.add(_this.contentClass);
+        })
+      })
+    }
+  }
+
+  // let tab = new Tab();
+  // tab.addEvent();
+  class AutoTab extends Tab{
+  constructor(options){
+    super(options);
+    options = options || {};
+    this.time = options.time || 1000;
+  }
+  autoPlay(){
+    // 定义一个变量，保存过当前是第几个li
+    let index = 0;
+    // 每隔一段时间
+    setInterval(() => {
+      let lis = document.querySelectorAll(this.navSelector);
+      let contents = document.querySelectorAll(this.contentSelector);
+      index = ++index % lis.length;
+      lis.forEach(e=>{
+        e.classList.remove(this.navClass);
+      })
+      lis[index].classList.add(this.navClass);
+      contents.forEach(e=>{
+        e.classList.remove(this.contentClass);
+      })
+      contents[index].classList.add(this.contentClass);
+    }, this.time);
+  }
+  }
+  let auto = new AutoTab();
+auto.addEvent();
+auto.autoPlay()
+</script>
+
+</html>
